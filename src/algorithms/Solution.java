@@ -9,10 +9,12 @@ package algorithms;
 public class Solution {
 
 	public static void main(String[] args) {
-		titleToNumber("EO");
-		titleToNumber_2("EO");// 3 * 26^0 + 2 * 26^1 + 1 * 26^2
+//		titleToNumber("EO");
+//		titleToNumber_2("ABC");// 3 * 26^0 + 2 * 26^1 + 1 * 26^2
+		convertToTitle(titleToNumber_2("ACC"));
+//		lengthOfLastWord("a");
 		
-		lengthOfLastWord("a");
+		factorial(4);
 	}
 
 	/*FIXME ---------------------------------------------------------------------------*/
@@ -38,24 +40,55 @@ public class Solution {
 		for(int i = 0 ; i <= lenght; i++){
 			num += ((s.charAt(lenght - i) - 'A' + 1) * Math.pow(26,i));
 		}
+		System.out.println("---------------");
+		System.out.println(s + " --> " + num);
 		return num;
 	}
 	
+	
 	/**
-	 * other
+	 * other solution.
 	 */
 	public static int titleToNumber_2(String s) {
         int l = s.length();
         int count = 0;
         for(int i = 0; i<l;i++ ){
-        	System.out.println(i + " b : " + s.charAt(i)  + " / " + count);
             count = count * 26  + s.charAt(i) - 'A' + 1;
-            System.out.println(i + " a : " + s.charAt(i)  + " / " + count);
         }
         System.out.println("---------------");
-		System.out.println("other : " + s + " --> " + count);
+		System.out.println(s + " --> " + count);
         return count;
     }
+	
+	/*FIXME ---------------------------------------------------------------------------*/
+	
+	/**
+	 * 168 Excel Sheet Column Title 
+	 * 
+	 * Given a positive integer, return its corresponding column title as appear in an Excel sheet.
+	 * 
+	 * For example:
+	 * 1 -> A
+     * 2 -> B
+     * 3 -> C
+     * ...
+     * 26 -> Z
+     * 27 -> AA
+     * 28 -> AB 
+	 */
+	public static String convertToTitle(int n){
+		StringBuffer sb = new StringBuffer();
+		int num = n;
+		int tag = 0;
+		while(num > 0){
+			tag = (num % 26 == 0 ? 26 : (num % 26));
+			sb.insert(0, (char)(tag + 64));
+			num = (num % 26 == 0 ? (num / 26 - 1) : (num / 26));
+		}
+		System.out.println("---------------");
+		System.out.println(n + " --> " + sb.toString());
+		return sb.toString();
+	}
 	
 	/*FIXME ---------------------------------------------------------------------------*/
 	
@@ -89,6 +122,14 @@ public class Solution {
 	/**
 	 * n!
 	 */
+	 public static int factorial(int n){
+		 if(n == 1){
+			 return 1;
+		 }
+		 return n * factorial(n - 1);
+	 }
 	
-	
+	 /*FIXME ---------------------------------------------------------------------------*/
+	 
+	 
 }
